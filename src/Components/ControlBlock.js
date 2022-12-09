@@ -2,7 +2,12 @@ import { Grid } from '@mui/material';
 
 function ControlBlock() {
     return (
-      <Grid container>
+      <Grid 
+        container
+        sx={{
+          mb: 2
+        }}
+      >
         Control block
       </Grid>
     );

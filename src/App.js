@@ -8,7 +8,13 @@ import TournamentsList from './Components/TournamentsList';
 
 function App() {
   return (
-    <Grid container sx={{m: 5}}>
+    <Grid 
+      container 
+      sx={{
+        p: 7,
+        background: "#FFFAF0"
+      }}
+    >
       <ControlBlock />
       <TournamentsList />
     </Grid>
