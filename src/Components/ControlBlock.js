@@ -1,4 +1,5 @@
 import { Grid } from '@mui/material';
+import CountriesSelect from './Controls/CountriesSelect';
 
 function ControlBlock() {
     return (
@@ -8,7 +9,7 @@ function ControlBlock() {
           mb: 2
         }}
       >
-        Control block
+        <CountriesSelect />
       </Grid>
     );
   }
