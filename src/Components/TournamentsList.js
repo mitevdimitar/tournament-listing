@@ -1,15 +1,16 @@
 import { Grid } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useContext } from 'react';
 import { getTournaments } from '../services/api';
+import { TournamentsContext } from '../services/context';
 import TournamentRow from './TournamentRow';
 
 function TournamentsList() {
-  const [tournaments, setTournaments] = useState([]);
+  const { tournaments, setTournaments } = useContext(TournamentsContext);
   
   const fetchTournaments = useCallback(async () => {
     const response = await getTournaments();
-    setTournaments(response)
-  }, []);
+    setTournaments(response);
+  }, [setTournaments]);
 
   useEffect(() => {
     fetchTournaments();
