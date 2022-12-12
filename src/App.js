@@ -3,14 +3,21 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Grid } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ControlBlock from './Components/ControlBlock';
 import TournamentsList from './Components/TournamentsList';
 import { TournamentsContext } from './services/context'; 
 
 function App() {
-  const [tournaments, setTournaments] = useState([]);
-  const value = {tournaments, setTournaments};
+  const [allTournaments, setAllTournaments] = useState([]);
+  const [filteredTournaments, setFilteredTournaments] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const value = {allTournaments, setAllTournaments, searchValue, setSearchValue, filteredTournaments, setFilteredTournaments};
+
+  useEffect(()=> {
+    console.log({searchValue})
+    //change filteredTournaments
+  }, [searchValue]);
 
   return (
     <TournamentsContext.Provider value={value}>

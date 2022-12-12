@@ -9,20 +9,20 @@ import { MenuItem, Typography, Grid } from '@mui/material';
 function CountriesSelect() {
     const [selectedCountry, setSelectedCountry] = useState('');
     const [countries, setCountrues] = useState([]);
-    const { tournaments } = useContext(TournamentsContext);
+    const { allTournaments } = useContext(TournamentsContext);
     
     useEffect(() => {
-        const tournamentCountries = tournaments.map(tournament => tournament.country);
+        const tournamentCountries = allTournaments.map(tournament => tournament.country);
         const uniqueCountries = Array.from(new Set(tournamentCountries.map(JSON.stringify))).map(JSON.parse);
         setCountrues(uniqueCountries);
-    }, [tournaments])
+    }, [allTournaments])
 
     const handleChange = (event) => {
         setSelectedCountry(event.target.value);
     };
 
     return (
-        <Box sx={{ minWidth: 220 }}>
+        <Box sx={{ minWidth: "30%" }}>
             <FormControl fullWidth>
                 <InputLabel id="countries-select-label">Country</InputLabel>
                 <Select
@@ -32,9 +32,9 @@ function CountriesSelect() {
                     label="Country"
                     onChange={handleChange}
                 >
-                    {countries.map((country, i) => {
+                    {countries.map((country) => {
                         return (
-                                    <MenuItem value={country.id}>
+                                    <MenuItem key={country.id} value={country.id}>
                                         <Grid container alignItems="center">
                                             <img height="15" alt="country-flag" src={country.url_flag} />
                                             <Typography sx={{ml: 2}}>

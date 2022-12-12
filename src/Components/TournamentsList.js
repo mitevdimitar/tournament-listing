@@ -5,21 +5,24 @@ import { TournamentsContext } from '../services/context';
 import TournamentRow from './TournamentRow';
 
 function TournamentsList() {
-  const { tournaments, setTournaments } = useContext(TournamentsContext);
+  const { filteredTournaments, setAllTournaments, setFilteredTournaments } = useContext(TournamentsContext);
   
   const fetchTournaments = useCallback(async () => {
     const response = await getTournaments();
-    setTournaments(response);
-  }, [setTournaments]);
+    setAllTournaments(response);
+    setFilteredTournaments(response);
+  }, [setAllTournaments, setFilteredTournaments]);
 
   useEffect(() => {
     fetchTournaments();
   }, [fetchTournaments]);
 
+  console.log({filteredTournaments})
+
 
   return (
     <Grid container>
-      {tournaments.map((tournament) => {
+      {filteredTournaments.map((tournament) => {
         return (
           <TournamentRow 
             key={tournament.id} 

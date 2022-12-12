@@ -1,7 +1,12 @@
 import React from 'react';
 
 export const TournamentsContext = React.createContext({
-    tournaments: [],
+    allTournaments: [],
+    setAllTournaments: () => {},
     filteredTournaments: [],
-    setTournaments: () => {},
+    setFilteredTournaments: () => {},
+    searchValue: "",
+    setSearchValue: () => {},
+    country: null,
+    setCountry: () => {},
 });
