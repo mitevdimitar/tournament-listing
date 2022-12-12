@@ -5,7 +5,11 @@ import { TournamentsContext } from '../services/context';
 import TournamentRow from './TournamentRow';
 
 function TournamentsList() {
-  const { filteredTournaments, setAllTournaments, setFilteredTournaments } = useContext(TournamentsContext);
+  const { 
+    filteredTournaments, 
+    setAllTournaments, 
+    setFilteredTournaments 
+  } = useContext(TournamentsContext);
   
   const fetchTournaments = useCallback(async () => {
     const response = await getTournaments();

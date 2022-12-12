@@ -7,9 +7,13 @@ import { TournamentsContext } from '../../services/context';
 import { MenuItem, Typography, Grid } from '@mui/material';
 
 function CountriesSelect() {
-    const [selectedCountry, setSelectedCountry] = useState('');
+    //const [selectedCountry, setSelectedCountry] = useState('');
     const [countries, setCountrues] = useState([]);
-    const { allTournaments } = useContext(TournamentsContext);
+    const { 
+        allTournaments,
+        country,
+        setCountry
+     } = useContext(TournamentsContext);
     
     useEffect(() => {
         const tournamentCountries = allTournaments.map(tournament => tournament.country);
@@ -18,7 +22,7 @@ function CountriesSelect() {
     }, [allTournaments])
 
     const handleChange = (event) => {
-        setSelectedCountry(event.target.value);
+        setCountry(event.target.value);
     };
 
     return (
@@ -28,7 +32,7 @@ function CountriesSelect() {
                 <Select
                     labelId="countries-select-label"
                     id="countries-select"
-                    value={selectedCountry}
+                    value={country}
                     label="Country"
                     onChange={handleChange}
                 >

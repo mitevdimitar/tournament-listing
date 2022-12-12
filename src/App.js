@@ -12,12 +12,26 @@ function App() {
   const [allTournaments, setAllTournaments] = useState([]);
   const [filteredTournaments, setFilteredTournaments] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const value = {allTournaments, setAllTournaments, searchValue, setSearchValue, filteredTournaments, setFilteredTournaments};
+  const [country, setCountry] = useState("");
+  const value = {
+    allTournaments, 
+    setAllTournaments, 
+    searchValue, 
+    setSearchValue, 
+    filteredTournaments, 
+    setFilteredTournaments,
+    country,
+    setCountry
+  };
 
   useEffect(()=> {
-    console.log({searchValue})
-    //change filteredTournaments
-  }, [searchValue]);
+    if (allTournaments.length === 0) {
+      return
+    }
+    console.log({searchValue, country})
+    const newFiltration = allTournaments.filter((tournament) => country ? tournament.country.id === country : true);
+    setFilteredTournaments(newFiltration);
+  }, [searchValue, country, allTournaments]);
 
   return (
     <TournamentsContext.Provider value={value}>
