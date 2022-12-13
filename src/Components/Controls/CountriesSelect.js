@@ -41,7 +41,12 @@ function CountriesSelect() {
                         return (
                                     <MenuItem key={country.id} value={country.id}>
                                         <Grid container alignItems="center">
-                                            <img height="15" alt="country-flag" src={country.url_flag} />
+                                            {country.url_flag ? (
+                                                <img height="15" alt="country-flag" src={country.url_flag} />
+                                            ) : (
+                                                <Grid sx={{width: 22.5, height: 15, border: "1px solid gray"}}>
+                                                </Grid>
+                                            )}
                                             <Typography sx={{ml: 2}}>
                                                 {country.name}
                                             </Typography>
