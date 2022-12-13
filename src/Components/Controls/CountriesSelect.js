@@ -4,16 +4,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useContext, useEffect, useState } from 'react';
 import { TournamentsContext } from '../../services/context';
-import { MenuItem, Typography, Grid } from '@mui/material';
+import { MenuItem, Typography, Grid, useMediaQuery } from '@mui/material';
 
 function CountriesSelect() {
-    //const [selectedCountry, setSelectedCountry] = useState('');
     const [countries, setCountrues] = useState([]);
     const { 
         allTournaments,
         country,
         setCountry
      } = useContext(TournamentsContext);
+
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
     
     useEffect(() => {
         const tournamentCountries = allTournaments.map(tournament => tournament.country);
@@ -26,7 +27,7 @@ function CountriesSelect() {
     };
 
     return (
-        <Box sx={{ minWidth: "30%" }}>
+        <Box sx={{ minWidth: isSmallScreen ? "100%" : "30%" }} mb={isSmallScreen ? 1 : 0}>
             <FormControl fullWidth>
                 <InputLabel id="countries-select-label">Country</InputLabel>
                 <Select

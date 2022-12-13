@@ -6,10 +6,12 @@ import FormControl from '@mui/material/FormControl';
 import SearchIcon from '@mui/icons-material/Search';
 import { TournamentsContext } from '../../services/context';
 import { useState, useContext } from 'react';
+import { useMediaQuery } from '@mui/material';
 
 function SearchInput() {
     const { searchValue, setSearchValue } = useContext(TournamentsContext);
     const [currentSearchValue, setCurrentSearchValue] = useState(searchValue); 
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     const handleSearch = () => {
         setSearchValue(currentSearchValue);
@@ -20,7 +22,7 @@ function SearchInput() {
     };
 
     return (
-        <FormControl sx={{ width: '30%' }} variant="outlined">
+        <FormControl sx={{ width: isSmallScreen ? "100%" : "30%" }} variant="outlined">
           <InputLabel htmlFor="search-input">Search by name</InputLabel>
           <OutlinedInput
             id="search-input"

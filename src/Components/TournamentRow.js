@@ -1,8 +1,10 @@
-import { Card, Grid, Typography } from '@mui/material';
+import { Card, Grid, Typography, useMediaQuery } from '@mui/material';
 
 function TournamentRow({
     tournament
 }) {
+    const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
     return (
         <Card 
             variant="outlined"
@@ -14,23 +16,27 @@ function TournamentRow({
             mb: 1,
             pl: 2,
             height: 40,
-            alignItems: "center"
+            alignItems: isSmallScreen ? "start" : "center",
+            flexDirection: isSmallScreen ? "column" : "row"
             }}
         >
             <Typography
                 sx={{
-                    fontSize: "1.1rem",
-                    mr: 2
+                    fontSize: isSmallScreen ? "0.9rem" : "1.1rem",
+                    mr: isSmallScreen ? 0 : 2
                 }}
             >
                 {tournament.name}
             </Typography>
-            <span>
-                -
-            </span>
+            {!isSmallScreen && (
+                <span>
+                    -
+                </span>
+            )}
             <Grid
                 sx={{
-                    ml: 2
+                    ml: isSmallScreen ? 0 : 2,
+                    fontSize: isSmallScreen && "0.8rem",
                 }}  
             >
                 {tournament.country && tournament.country.name}

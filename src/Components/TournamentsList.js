@@ -21,9 +21,6 @@ function TournamentsList() {
     fetchTournaments();
   }, [fetchTournaments]);
 
-  console.log({filteredTournaments})
-
-
   return (
     <Grid container>
       {filteredTournaments.map((tournament) => {

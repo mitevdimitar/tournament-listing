@@ -2,8 +2,8 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { Grid, useMediaQuery } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
 import ControlBlock from './Components/ControlBlock';
 import TournamentsList from './Components/TournamentsList';
 import { TournamentsContext } from './services/context'; 
@@ -24,21 +24,26 @@ function App() {
     setCountry
   };
 
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+
+  const filterTournaments = useCallback(() => {
+    const newFiltration = allTournaments.filter((tournament) => country ? tournament.country.id === country : true);
+    setFilteredTournaments(newFiltration);
+  }, [/* searchValue,  */country, allTournaments]);
+
   useEffect(()=> {
     if (allTournaments.length === 0) {
       return
     }
-    console.log({searchValue, country})
-    const newFiltration = allTournaments.filter((tournament) => country ? tournament.country.id === country : true);
-    setFilteredTournaments(newFiltration);
-  }, [searchValue, country, allTournaments]);
+    filterTournaments();
+  }, [filterTournaments, allTournaments.length]);
 
   return (
     <TournamentsContext.Provider value={value}>
       <Grid 
         container 
         sx={{
-          p: 7,
+          p: isSmallScreen ? 2 : 7,
           background: "#FFFAF0"
         }}
       >
