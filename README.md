@@ -1,6 +1,6 @@
 ## Tournament listing app
 
-# Steps to start the project locally:
+### Steps to start the project locally:
 
 1. clone the repo
 2. npm install
