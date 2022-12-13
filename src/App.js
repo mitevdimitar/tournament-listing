@@ -27,9 +27,15 @@ function App() {
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
   const filterTournaments = useCallback(() => {
-    const newFiltration = allTournaments.filter((tournament) => country ? tournament.country.id === country : true);
-    setFilteredTournaments(newFiltration);
-  }, [/* searchValue,  */country, allTournaments]);
+    const newFiltration = allTournaments.filter(tournament => country ? tournament.country.id === country : true);
+    if (searchValue) {
+      const alteredSearchValue = searchValue.toLowerCase();
+      const searchResult = newFiltration.filter(tournament => tournament.name.toLowerCase().includes(alteredSearchValue));
+      setFilteredTournaments(searchResult);
+    } else {
+      setFilteredTournaments(newFiltration);
+    }
+  }, [searchValue, country, allTournaments]);
 
   useEffect(()=> {
     if (allTournaments.length === 0) {
@@ -41,10 +47,10 @@ function App() {
   return (
     <TournamentsContext.Provider value={value}>
       <Grid 
-        container 
         sx={{
           p: isSmallScreen ? 2 : 7,
-          background: "#FFFAF0"
+          background: "#FFFAF0",
+          minHeight: "100vh"
         }}
       >
         <ControlBlock />

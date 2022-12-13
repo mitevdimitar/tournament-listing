@@ -9,17 +9,25 @@ import { useState, useContext } from 'react';
 import { useMediaQuery } from '@mui/material';
 
 function SearchInput() {
-    const { searchValue, setSearchValue } = useContext(TournamentsContext);
+    const { searchValue, setSearchValue, setFilteredTournaments, allTournaments } = useContext(TournamentsContext);
     const [currentSearchValue, setCurrentSearchValue] = useState(searchValue); 
     const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 
     const handleSearch = () => {
-        setSearchValue(currentSearchValue);
+      setSearchValue(currentSearchValue);
     }
 
     const handleMouseDownSearch = (event) => {
         event.preventDefault();
     };
+
+    const handleChange = (event) => {
+      setCurrentSearchValue(event.target.value)
+      if (!event.target.value) {
+        setSearchValue(event.target.value);
+        setFilteredTournaments(allTournaments)
+      }
+    }
 
     return (
         <FormControl sx={{ width: isSmallScreen ? "100%" : "30%" }} variant="outlined">
@@ -28,7 +36,7 @@ function SearchInput() {
             id="search-input"
             type='text'
             value={currentSearchValue}
-            onChange={(e)=>setCurrentSearchValue(e.target.value)}
+            onChange={handleChange}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
